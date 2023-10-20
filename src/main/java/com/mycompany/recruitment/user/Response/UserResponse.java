@@ -15,17 +15,11 @@ import java.time.LocalDateTime;
 public class UserResponse {
 
     String id;
-
     String login;
-
     String name;
-
     String type;
-
     String avatarUrl;
-
     LocalDateTime createdAt;
-
     BigDecimal calculations;
 
 }

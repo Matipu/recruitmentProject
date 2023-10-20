@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
 
     @GetMapping("/{login}")
     public UserResponse getUser(@PathVariable String login) {
