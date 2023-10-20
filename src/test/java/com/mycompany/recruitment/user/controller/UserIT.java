@@ -2,21 +2,23 @@ package com.mycompany.recruitment.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.recruitment.integrations.github.api.response.GithubUserResponse;
-import com.mycompany.recruitment.user.Response.UserResponse;
+import com.mycompany.recruitment.user.response.UserResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -27,7 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserIT {
 
     @MockBean
-    RestTemplate restTemplate;
+    private WebClient mockedWebClient;
+
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
@@ -58,13 +61,8 @@ public class UserIT {
                 .calculations(null)
                 .build();
 
-        ResponseEntity<GithubUserResponse> responseEntity = new ResponseEntity<>(
-                githubResponse,
-                HttpStatusCode.valueOf(200)
-        );
-
         // When
-        when(restTemplate.getForEntity("https://api.github.com/users/testUser", GithubUserResponse.class)).thenReturn(responseEntity);
+        createMockWebClient("https://api.github.com/users/testUser", githubResponse);
 
         String responseBody = mvc.perform(get("/users/testUser"))
                 // Then
@@ -76,4 +74,18 @@ public class UserIT {
                 objectMapper.writeValueAsString(expectedResult));
     }
 
+    void createMockWebClient(String uri, Object responseDTO) {
+        // Create the mock objects
+        WebClient.RequestHeadersUriSpec requestHeadersUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
+        WebClient.RequestBodySpec requestBodyMock = mock(WebClient.RequestBodySpec.class);
+        WebClient.ResponseSpec responseSpecMock = mock(WebClient.ResponseSpec.class);
+        ClientResponse responseMock = mock(ClientResponse.class);
+
+        // Configure the mock objects
+        when(mockedWebClient.get()).thenReturn(requestHeadersUriSpec);
+        when(requestHeadersUriSpec.uri(uri)).thenReturn(requestBodyMock);
+        when(requestBodyMock.retrieve()).thenReturn(responseSpecMock);
+        when(responseSpecMock.bodyToMono(any(Class.class))).thenReturn(Mono.just(responseDTO));
+        when(responseMock.bodyToMono(any(Class.class))).thenReturn(Mono.just(responseDTO));
+    }
 }

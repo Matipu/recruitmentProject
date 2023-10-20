@@ -1,7 +1,7 @@
-package com.mycompany.recruitment.user.mapper.UserMapper;
+package com.mycompany.recruitment.user.mapper;
 
 import com.mycompany.recruitment.integrations.github.api.response.GithubUserResponse;
-import com.mycompany.recruitment.user.Response.UserResponse;
+import com.mycompany.recruitment.user.response.UserResponse;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

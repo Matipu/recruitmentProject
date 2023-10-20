@@ -2,21 +2,23 @@ package com.mycompany.recruitment.integrations.github.api.consumer;
 
 import com.mycompany.recruitment.integrations.github.api.response.GithubUserResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 @RequiredArgsConstructor
 public class GithubUserConsumer {
 
-    static final String GITHUB_USER_URL = "https://api.github.com/users/";
-
-    private final RestTemplate restTemplate;
+    static final String GITHUB_USER_URL = "https://api.github.com/";
+    private final WebClient webClient;
 
     public GithubUserResponse getUser(@PathVariable String login) {
-        ResponseEntity<GithubUserResponse> response = restTemplate.getForEntity(GITHUB_USER_URL + login, GithubUserResponse.class);
-        return response.getBody();
+        return webClient.get().uri("/users/" + login)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<GithubUserResponse>() {
+                })
+                .block();
     }
 }

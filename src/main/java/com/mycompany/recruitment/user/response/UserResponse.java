@@ -1,4 +1,4 @@
-package com.mycompany.recruitment.user.Response;
+package com.mycompany.recruitment.user.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

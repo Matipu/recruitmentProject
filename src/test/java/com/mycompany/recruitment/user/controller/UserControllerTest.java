@@ -1,6 +1,6 @@
 package com.mycompany.recruitment.user.controller;
 
-import com.mycompany.recruitment.user.Response.UserResponse;
+import com.mycompany.recruitment.user.response.UserResponse;
 import com.mycompany.recruitment.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
