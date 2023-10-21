@@ -33,8 +33,8 @@ public class GithubUserResponse {
     private LocalDateTime createdAt;
 
     @JsonProperty("followers")
-    private Integer followers;
+    private Long followers;
 
     @JsonProperty("public_repos")
-    private Integer publicRepos;
+    private Long publicRepos;
 }

@@ -2,7 +2,7 @@ package com.mycompany.recruitment.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.recruitment.integrations.github.api.response.GithubUserResponse;
-import com.mycompany.recruitment.user.Response.UserResponse;
+import com.mycompany.recruitment.user.response.UserResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -37,15 +37,16 @@ public class UserIT {
     public void givenEmployees_whenGetEmployees_thenStatus200()
             throws Exception {
         // Given
+        LocalDateTime createdAt = LocalDateTime.now();
         GithubUserResponse githubResponse = GithubUserResponse.builder()
                 .id("583231")
                 .login("testUser")
                 .name("test user")
                 .type("User")
                 .avatarUrl("https://avatars.githubusercontent.com/u/583231?v=4")
-                .createdAt(LocalDateTime.now())
-                .followers(5)
-                .publicRepos(5)
+                .createdAt(createdAt)
+                .followers(5L)
+                .publicRepos(5L)
                 .build();
 
         UserResponse expectedResult = UserResponse.builder()
@@ -54,8 +55,8 @@ public class UserIT {
                 .name("test user")
                 .type("User")
                 .avatarUrl("https://avatars.githubusercontent.com/u/583231?v=4")
-                .createdAt(LocalDateTime.now())
-                .calculations(null)
+                .createdAt(createdAt)
+                .calculations(8.4)
                 .build();
 
         ResponseEntity<GithubUserResponse> responseEntity = new ResponseEntity<>(

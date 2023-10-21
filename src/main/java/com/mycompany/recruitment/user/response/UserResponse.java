@@ -1,11 +1,10 @@
-package com.mycompany.recruitment.user.Response;
+package com.mycompany.recruitment.user.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -20,6 +19,6 @@ public class UserResponse {
     String type;
     String avatarUrl;
     LocalDateTime createdAt;
-    BigDecimal calculations;
+    Double calculations;
 
 }

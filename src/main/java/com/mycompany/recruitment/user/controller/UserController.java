@@ -1,6 +1,6 @@
 package com.mycompany.recruitment.user.controller;
 
-import com.mycompany.recruitment.user.Response.UserResponse;
+import com.mycompany.recruitment.user.response.UserResponse;
 import com.mycompany.recruitment.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
