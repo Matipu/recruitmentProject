@@ -1,6 +1,6 @@
 package com.mycompany.recruitment.user.controller;
 
-import com.mycompany.recruitment.user.response.UserResponse;
+import com.mycompany.recruitment.user.dto.UserDto;
 import com.mycompany.recruitment.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+  private final UserService userService;
 
-    @GetMapping("/{login}")
-    public UserResponse getUser(@PathVariable String login) {
-        return userService.getUser(login);
-    }
+  @GetMapping("/{login}")
+  public UserDto getUser(@PathVariable String login) {
+    return userService.getUser(login);
+  }
 }

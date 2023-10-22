@@ -1,17 +1,16 @@
 package com.mycompany.recruitment.user.controller;
 
-import com.mycompany.recruitment.user.response.UserResponse;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.mycompany.recruitment.user.dto.UserDto;
 import com.mycompany.recruitment.user.service.UserService;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
@@ -23,9 +22,9 @@ class UserControllerTest {
     UserService userService;
 
     @Test
-    void shouldGetUserMethodCallServiceAndReturnCorrectValue() {
+    void shouldCallGetUserMethodAndReturnCorrectValue() {
         // Given
-        UserResponse userResponse = UserResponse.builder()
+      UserDto userDto = UserDto.builder()
                 .id("583231")
                 .login("octocat")
                 .name("The Octocat")
@@ -35,15 +34,15 @@ class UserControllerTest {
                 .calculations(10.0)
                 .build();
 
-        Mockito.when(userService.getUser("testLogin")).thenReturn(userResponse);
+      Mockito.when(userService.getUser("testLogin")).thenReturn(userDto);
 
         // When
-        UserResponse response = userController.getUser("testLogin");
+      UserDto response = userController.getUser("testLogin");
 
         // Then
         assertThat(response)
                 .usingRecursiveComparison()
-                .isEqualTo(userResponse);
+            .isEqualTo(userDto);
     }
 
 }
