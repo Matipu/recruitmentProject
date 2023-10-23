@@ -1,6 +1,6 @@
 package com.mycompany.recruitment.user.math;
 
-import com.mycompany.recruitment.user.exception.BusinessException;
+import com.mycompany.recruitment.configuration.exception.BusinessException;
 
 public class UserMathOperations {
 

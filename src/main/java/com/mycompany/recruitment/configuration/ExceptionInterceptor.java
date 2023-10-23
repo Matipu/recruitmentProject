@@ -1,7 +1,7 @@
 package com.mycompany.recruitment.configuration;
 
-import com.mycompany.recruitment.user.exception.BusinessException;
-import com.mycompany.recruitment.user.exception.TechnicalException;
+import com.mycompany.recruitment.configuration.exception.BusinessException;
+import com.mycompany.recruitment.configuration.exception.TechnicalException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;

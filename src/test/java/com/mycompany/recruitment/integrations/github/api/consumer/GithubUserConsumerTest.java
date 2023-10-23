@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+import com.mycompany.recruitment.configuration.exception.BusinessException;
+import com.mycompany.recruitment.configuration.exception.TechnicalException;
 import com.mycompany.recruitment.integrations.github.api.response.GithubUserResponse;
-import com.mycompany.recruitment.user.exception.BusinessException;
-import com.mycompany.recruitment.user.exception.TechnicalException;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

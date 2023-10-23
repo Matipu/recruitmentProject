@@ -3,6 +3,7 @@ package com.mycompany.recruitment.user.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,10 @@ public class UserStatistic {
 
   @Column(name = "REQUEST_COUNT")
   Integer requestCount;
+
+  @Version
+  @Column(name = "VERSION")
+  long version;
 
   public void incrementRequestCount() {
     requestCount++;

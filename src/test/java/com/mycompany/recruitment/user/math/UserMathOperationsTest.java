@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import com.mycompany.recruitment.user.exception.BusinessException;
+import com.mycompany.recruitment.configuration.exception.BusinessException;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,16 +19,14 @@ class UserMathOperationsTest {
   private final static double EPSILON = 0.00001;
 
   private static Stream<Arguments> calculationData() {
-    return Stream.of(arguments(5L, 5L, 8.4), arguments(7L, 7L, 7.71428571));
+    return Stream.of(arguments(5L, 5L, 8.4), arguments(7L, 7L, 7.71428571), arguments(7L, 0L, 1.7142857));
   }
 
   @Test
   void shouldThrowExceptionWhenFollowersIsZero() {
     // When
     // Then
-    assertThrows(BusinessException.class, () -> {
-      UserMathOperations.calculations(0L, 5L);
-    });
+    assertThrows(BusinessException.class, () -> UserMathOperations.calculations(0L, 5L));
   }
 
   @ParameterizedTest

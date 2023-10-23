@@ -1,4 +1,4 @@
-package com.mycompany.recruitment.user.exception;
+package com.mycompany.recruitment.configuration.exception;
 
 public class BusinessException extends RuntimeException {
 

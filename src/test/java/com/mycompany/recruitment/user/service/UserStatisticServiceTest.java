@@ -43,7 +43,7 @@ class UserStatisticServiceTest {
   @Test
   void shouldUpdateUserStatistic() {
     // Given
-    Mockito.when(userStatisticRepository.findById("testLogin")).thenReturn(Optional.of(new UserStatistic("testLogin", 1)));
+    Mockito.when(userStatisticRepository.findById("testLogin")).thenReturn(Optional.of(new UserStatistic("testLogin", 1, 1)));
 
     // When
     userStatisticService.updateUserStatistic("testLogin");
